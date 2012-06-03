@@ -1,9 +1,9 @@
-#include	<iostream>
-#include	<fstream>
-#include	<ctime>
-#include	<string>
-#include	<cmath>
-#include	<stdlib.h>
+#include        <iostream>
+#include        <fstream>
+#include        <ctime>
+#include        <string>
+#include        <cmath>
+#include        <stdlib.h>
 #include        "sort.h"
 
 using namespace std;
@@ -11,14 +11,11 @@ using namespace std;
 int
 cmp (const void *left, const void *right)
 {
-  if (*(double *)left < *(double *)right) {
-    return 1;
-  }
-  if (*(double *)left > *(double *)right) {
-    return -1;
-  }
-
-  return 0;
+    if (*(double *)left < *(double *)right)
+        return 1;
+    if (*(double *)left > *(double *)right)
+        return -1;
+    return 0;
 }
 
 void
@@ -32,9 +29,7 @@ main (int argc, char *argv[])
     double *source = NULL;
     unsigned int *index = NULL;
 
-    if (argc < 4) {
-        exit (-1);
-    }
+    if (argc < 4) exit (-1);
 
     nodenr = atoi (argv[1]);
     if (nodenr < 1) {
@@ -45,9 +40,8 @@ main (int argc, char *argv[])
 
     source = new double[nodenr];
     index = new unsigned int[nodenr];
-    for (unsigned int n = 0; n < nodenr; ++n) {
-      index[n] = n;
-    }
+    for (unsigned int n = 0; n < nodenr; ++n)
+        index[n] = n;
 
     pagerank (nodenr, argv[3], source, alpha);
 
@@ -87,9 +81,8 @@ pagerank (int nodenr, const char *filename, double *source, double alpha)
     int iteration = 0, iterator = 25;
     ifstream istream;
 
-    for (int i = 0; i < nodenr; ++i) {
+    for (int i = 0; i < nodenr; ++i)
         source[i] = init;
-    }
 
     istream.open (filename, std::ios_base::in);
     if (istream.fail ()) {
@@ -101,9 +94,8 @@ pagerank (int nodenr, const char *filename, double *source, double alpha)
         iteration++;
         time_t t = time (NULL);
         std::cerr << "Iteration " << iteration << " starts at: " << ctime (&t);
-        for (unsigned int i = 0; i < nodenr; i++) {
+        for (unsigned int i = 0; i < nodenr; i++)
             target[i] = 0.0;
-        }
         unsigned int count = 0;
         double dangling = 0.0;
         int n = 0;
@@ -153,9 +145,7 @@ pagerank (int nodenr, const char *filename, double *source, double alpha)
         }
         deviation = sqrtl (deviation * deviation);
         std::cerr << "Deviation: " << deviation << std::endl;
-        if (deviation < threshold) {
-            break;
-        }
+        if (deviation < threshold) break;
         istream.clear ();
         istream.seekg (0, std::ios::beg);
         t = time (NULL);
