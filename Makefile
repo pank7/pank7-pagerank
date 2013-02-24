@@ -7,8 +7,10 @@ INCLUDES	= -I./
 LIBPATH		= 
 LIBS		= 
 
-CC		= gcc
-CPP		= g++
+# CC		= gcc
+CC		= clang
+# CPP		= g++
+CPP		= clang++
 
 CFLAGS		= -c
 OFLAGS		= 
@@ -17,7 +19,7 @@ CFLAGS		+= $(INCLUDES)
 OFLAGS		+= $(LIBPATH)
 
 %.o : %.cpp
-	$(CXX) $(CFLAGS) $^
+	$(CPP) $(CFLAGS) $^
 
 %.o : %.c
 	$(CC) $(CFLAGS) $^
@@ -38,4 +40,4 @@ etags :
 	find $(SRCDIR) -name '*.h' -or -name '*.hh' -or -name '*.c' -or -name '*.cpp' -or -name '*.l' -or -name '*.y' | xargs etags -a;
 
 pagerank : $(OBJECTS)
-	$(CXX) $(OFLAGS) -o $@ $^
+	$(CPP) $(OFLAGS) -o $@ $^
